@@ -147,6 +147,27 @@ app.get("/", (req, res) => {
   });
 });
 
+const express = require("express");
+const serverless = require("serverless-http");
+
+
+
+// Middleware
+app.use(express.json());
+
+// Test route (VERY IMPORTANT)
+app.get("/", (req, res) => {
+  res.json({ message: "API is working ✅" });
+});
+
+// Example API route
+app.get("/test", (req, res) => {
+  res.json({ success: true });
+});
+
+// ✅ EXPORT (no app.listen)
+module.exports = serverless(app);
+
 // ================= START SERVER =================
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
