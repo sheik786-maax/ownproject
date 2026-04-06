@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 import axios from 'axios';
 import { Download, Save } from 'lucide-react';
 
-export default function InvoicePreview({ formData, items, totals, onSaved, onExport }) {
+export default function InvoicePreview({ formData, items, totals, onSaved }) {
   const invoiceRef = useRef();
   const [saving, setSaving] = useState(false);
   const [showModal, setShowModal] = useState(false);

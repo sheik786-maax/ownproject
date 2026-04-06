@@ -95,7 +95,9 @@ function App() {
         });
         setItems([{ product_name: '', hsn_sac: '', qty: 1, rate: 0, taxable_value: 0, cgst_percent: 9, cgst_amount: 0, sgst_percent: 9, sgst_amount: 0, igst_percent: 0, igst_amount: 0, total: 0 }]);
       }
-    } catch (err) { }
+    } catch (err) {
+      console.error("Failed to refresh next invoice number on save", err);
+    }
   };
 
   return (

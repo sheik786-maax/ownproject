@@ -81,7 +81,6 @@ export default function InvoiceForm({ formData, setFormData, items, setItems }) 
   };
 
   const addItem = () => {
-    const lastItem = items[items.length - 1];
     setItems((prev) => [
       ...prev,
       {
