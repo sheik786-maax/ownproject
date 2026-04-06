@@ -1,23 +1,20 @@
 require("dotenv").config();
 
+const express = require("express");
 const mysql = require("mysql2/promise");
 const cors = require("cors");
 
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// Middleware
 app.use(cors());
 app.use(express.json());
-const db = require("./db");
-
-// ================= PORT =================
-const serverless = require("serverless-http");
-const express = require("express");
-const app = express();
-
-
-// your routes here
-
-module.exports = serverless(app);
 
 // ================= DATABASE CONNECTION =================
 const pool = mysql.createPool({
@@ -58,6 +55,20 @@ app.get("/api/invoices/next-number", async (req, res) => {
 });
 
 // ================= CREATE INVOICE =================
+
+
+app.get("/api/invoices", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM invoices ORDER BY id DESC");
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch invoices" });
+  }
+});
+
+
+
+
 app.post("/api/invoices", async (req, res) => {
   const conn = await pool.getConnection();
 
@@ -140,39 +151,17 @@ app.post("/api/invoices", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Billing Backend Running 🚀",
-    status: "OK"
-  });
-});
-
-const express = require("express");
-const serverless = require("serverless-http");
-
-
-
-// Middleware
-app.use(express.json());
-
-// Test route (VERY IMPORTANT)
-app.get("/", (req, res) => {
-  res.json({ message: "API is working ✅" });
-});
-
-// Example API route
-app.get("/test", (req, res) => {
-  res.json({ success: true });
-});
-
-// ✅ EXPORT (no app.listen)
-module.exports = serverless(app);
-
-// ================= START SERVER =================
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
+// ================= 404 =================
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
+
+// ================= START SERVER =================
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+}
+
+
+
+
+);
