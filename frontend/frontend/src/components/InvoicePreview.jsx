@@ -243,18 +243,18 @@ export default function InvoicePreview({ formData, items, totals, onSaved }) {
         {/* Tax Invoice Banner Row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '2px solid black', borderBottom: '1px solid black', padding: 'calc(var(--r-pad) * 1.5) var(--r-pad)', fontSize: 'var(--f-row)', fontWeight: '900', color: '#000' }}>
           <div style={{ flex: 1, fontSize: 'calc(var(--f-hdr) * 1.1)' }}>GSTIN : 33ARUPM7277N1ZR</div>
-          <div style={{ flex: 1, textAlign: 'center', fontSize: 'calc(var(--f-hdr) * 1.4)', letterSpacing: '2px' }}>{invoiceTitle}</div>
+          <div style={{ flex: 1, textAlign: 'center', fontSize: 'calc(var(--f-hdr) * 1.4)', letterSpacing: '2px', whiteSpace: 'nowrap' }}>{invoiceTitle}</div>
           <div style={{ flex: 1, textAlign: 'right', fontSize: 'var(--f-hdr)' }}>{activeCopyText}</div>
         </div>
 
         {/* 2-Column Info Table Wrapper */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: '125px', borderBottom: '1px solid black', borderLeft: '1px solid black', borderRight: '1px solid black', backgroundColor: 'transparent', margin: 0 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: '140px', borderBottom: '1px solid black', borderLeft: '1px solid black', borderRight: '1px solid black', backgroundColor: 'transparent', margin: 0 }}>
           {/* Left Column: Buyer's Details */}
           <div style={{ borderRight: '1px solid black', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 'var(--f-row)', borderBottom: '1px solid black', padding: 'var(--r-pad)' }}>Buyer's Details</div>
+            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 'var(--f-row)', borderBottom: '1px solid black', padding: 'var(--r-pad)' }}>{"Buyer's Details"}</div>
             <div style={{ padding: 'var(--r-pad)', fontSize: 'var(--f-row)', display: 'grid', gridTemplateColumns: '85px 1fr', gap: '2px', flex: 1, overflow: 'hidden' }}>
               <strong style={{color: '#000'}}>M/S</strong> <div style={{color: '#000'}}>{formData.customer_name || 'Customer Name'}</div>
-              <strong style={{color: '#000'}}>Address</strong> <div style={{color: '#000', whiteSpace: 'pre-wrap', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{formData.customer_address || 'Customer Address here...'}</div>
+              <strong style={{color: '#000'}}>Address</strong> <div style={{color: '#000', whiteSpace: 'pre-wrap', display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{formData.customer_address || 'Customer Address here...'}</div>
               <strong style={{color: '#000'}}>Phone</strong> <div style={{color: '#000'}}>{formData.customer_phone || '---'}</div>
               <strong style={{color: '#000'}}>GSTIN</strong> <div style={{color: '#000'}}>{formData.customer_gstin || '---'}</div>
               <strong style={{color: '#000'}}>Place of Supply</strong> <div style={{color: '#000'}}>{formData.place_of_supply}</div>
@@ -320,7 +320,7 @@ export default function InvoicePreview({ formData, items, totals, onSaved }) {
               </tr>
             ))}
             {/* Blank filler rows to make the table look full natively without blowing up flex height */}
-            {Array.from({ length: Math.max(0, 10 - items.length) }).map((_, idx) => (
+            {Array.from({ length: Math.max(0, 8 - items.length) }).map((_, idx) => (
               <tr key={`blank-${idx}`} style={{ borderBottom: 'none' }}>
                 <td style={{ borderRight: '1px solid black', borderBottom: 'none', borderLeft: 'none', padding: 'var(--r-pad)' }}>&nbsp;</td>
                 <td style={{ borderRight: '1px solid black', borderBottom: 'none', borderLeft: 'none', padding: 'var(--r-pad)' }}>&nbsp;</td>
@@ -506,7 +506,7 @@ export default function InvoicePreview({ formData, items, totals, onSaved }) {
           {/* Top Section (Bank Details) - Full Width */}
           <div style={{ borderBottom: '1px solid black' }}>
             <div style={{ fontWeight: 'bold', padding: 'var(--r-pad)', borderBottom: '1px solid black', fontSize: 'var(--f-sm)' }}>
-              Company's Bank Details
+              {"Company's Bank Details"}
             </div>
             <div style={{ padding: 'var(--g-mar)', display: 'grid', gridTemplateColumns: '130px 1fr', gap: '2px', fontSize: 'var(--f-row)' }}>
               <div style={{fontWeight: 'normal'}}>Bank Name</div> <div style={{fontWeight: 'bold'}}>: Canara Bank</div>
@@ -552,7 +552,7 @@ export default function InvoicePreview({ formData, items, totals, onSaved }) {
         </div>
 
         <div style={{ marginTop: '4px', fontSize: 'var(--f-xs)', textAlign: 'center' }}>
-          <div style={{ textTransform: 'uppercase' }}>Customer's Services is our Primary Duty</div>
+          <div style={{ textTransform: 'uppercase' }}>{"CUSTOMER'S SERVICES IS OUR PRIMARY DUTY"}</div>
           <div>This is a Computer Generated Invoice</div>
         </div>
 
